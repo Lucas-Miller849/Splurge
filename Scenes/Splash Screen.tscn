@@ -1,0 +1,127 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://Assets/Player/Player 2.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Tile Map 2/Floor.png" type="Texture" id=2]
+[ext_resource path="res://Assets/UI PACK/LargeButton/UI-9.png" type="Texture" id=3]
+[ext_resource path="res://Assets/UI PACK/LargeButton/UI-01.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Player/Player 1.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Player/Player 3.png" type="Texture" id=6]
+[ext_resource path="res://Scripts/Splash Screen.gd" type="Script" id=7]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 5 ), ExtResource( 1 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "Walking",
+"speed": 5.0
+} ]
+
+[sub_resource type="Animation" id=2]
+resource_name = "Animation"
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("AnimatedSprite:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( -125.278, -0.25, 0, 0.25, 0, 515, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("AnimatedSprite:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 246.579, -0.25, 0, 0.25, 0, 246.579, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1 )
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AnimatedSprite:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="DynamicFontData" id=3]
+
+[sub_resource type="DynamicFont" id=4]
+font_data = SubResource( 3 )
+
+[sub_resource type="DynamicFontData" id=5]
+
+[sub_resource type="DynamicFont" id=6]
+size = 19
+outline_size = 10
+outline_color = Color( 0, 0, 0, 1 )
+font_data = SubResource( 5 )
+
+[node name="Splash Screen" type="TextureRect"]
+margin_left = 3.0
+margin_right = 1026.0
+margin_bottom = 597.0
+texture = ExtResource( 2 )
+expand = true
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( -125.278, 246.579 )
+scale = Vector2( 6.50163, 6.30277 )
+frames = SubResource( 1 )
+animation = "Walking"
+frame = 1
+playing = true
+flip_h = true
+
+[node name="TextureButton" type="TextureButton" parent="."]
+margin_left = 122.011
+margin_top = 374.943
+margin_right = 915.011
+margin_bottom = 580.943
+texture_normal = ExtResource( 4 )
+texture_pressed = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Animation"
+anims/Animation = SubResource( 2 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 134.0
+margin_top = 389.0
+margin_right = 895.0
+margin_bottom = 569.0
+custom_fonts/font = SubResource( 4 )
+text = "Play"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="."]
+margin_left = 172.0
+margin_top = 31.0
+margin_right = 847.0
+margin_bottom = 105.0
+custom_fonts/font = SubResource( 6 )
+text = "Splurge"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="TextureButton" to="." method="_on_TextureButton_pressed"]
